@@ -172,6 +172,10 @@ svg.addEventListener('pointerup', (e) => {
   else { cancel(); toast('Suelta el cable encima de un tornillo.'); }
 });
 svg.addEventListener('pointercancel', () => { drag = null; });
+// En táctil, un gesto que empieza en un tornillo es un cable, no un desplazamiento de página.
+// (touch-action no se aplica a elementos internos del SVG en todos los navegadores.)
+svg.addEventListener('touchstart', (e) => { if (e.target.closest?.('.hit')) e.preventDefault(); }, { passive: false });
+svg.addEventListener('touchmove', (e) => { if (drag) e.preventDefault(); }, { passive: false });
 svg.addEventListener('click', (e) => {
   if (S.pending) {
     const t2 = nearest(svgPoint(e), L.snap, null);

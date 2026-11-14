@@ -16,6 +16,7 @@ js/draw.js          Dibujo SVG del tablero (horizontal en escritorio, vertical e
 js/main.js          Estado, render e interacción (conectar cables, PIA, acciones)
 assets/             Icono
 tests/              Tests de la simulación (node:test)
+tests/e2e/          Prueba de uso real con Playwright (ratón, táctil, Safari)
 ```
 
 ## Desarrollo
@@ -24,7 +25,10 @@ No hace falta compilar nada. Los módulos ES necesitan un servidor local:
 
 ```
 npm start      # sirve en http://localhost:8000
-npm test       # pruebas de la simulación
+npm test             # pruebas de la simulación
+npm run setup:e2e    # una vez: instala Playwright y WebKit
+npm run test:e2e     # prueba la web publicada en Chrome, Chrome móvil y Safari iPhone
+                     # (SITE=http://localhost:8000/ npm run test:e2e para la copia local)
 ```
 
 Cada push a `main` se publica solo en GitHub Pages.

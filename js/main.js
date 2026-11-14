@@ -367,6 +367,13 @@ $('aSol').onclick = () => {
   if (!render()) toast('Solución puesta. Deshacer vuelve a tus cables.');
 };
 
+// La barra inferior es fija: la página reserva su altura al llevar algo a la vista
+// y el tablero deja un hueco al final para que ningún tornillo quede tapado.
+const dock = document.querySelector('.dock');
+new ResizeObserver(() => {
+  document.documentElement.style.setProperty('--dock-h', `${dock.offsetHeight}px`);
+}).observe(dock);
+
 mq.addEventListener('change', build);
 syncChips();
 build();

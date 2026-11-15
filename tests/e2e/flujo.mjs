@@ -27,6 +27,8 @@ async function run(label, browserType, ctxOpts, mode) {
   console.log(`\n=== ${label} ===`);
   const browser = await browserType.launch(browserType === chromium ? { channel: 'chrome' } : {});
   const ctx = await browser.newContext(ctxOpts);
+  // las pruebas no cuentan como visitas en las estadísticas
+  await ctx.route(/goatcounter\.com|gc\.zgo\.at/, (r) => r.abort());
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
